@@ -4,10 +4,10 @@ const placesList = document.querySelector('.places__list');
 
 function createCard(link, name, template){
 
-        let cardItem = template.querySelector('.places__item').cloneNode(true);
-        let cardImage = cardItem.querySelector('.card__image');
-        let cardtext = cardItem.querySelector('.card__title');
-        let cardDeleteButton = cardItem.querySelector('.card__delete-button');
+        const cardItem = template.querySelector('.places__item').cloneNode(true);
+        const cardImage = cardItem.querySelector('.card__image');
+        const cardtext = cardItem.querySelector('.card__title');
+        const cardDeleteButton = cardItem.querySelector('.card__delete-button');
 
         cardImage.src = link;
         cardtext.textContent = name;
