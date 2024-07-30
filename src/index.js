@@ -3,10 +3,14 @@ import {initialCards, renderCard, saveCard} from './scripts/cards.js';
 import {
     editPopup,
     addPopup,
+    imagePopup,
+    nameInput,
+    jobInput,
     openPopup, 
     closePopup,
     handleFormSubmit,
-    closeClick
+    closeClick,
+    formPlaceholder,
 } from './scripts/modal.js';
 
 const logo = new URL('./images/logo.svg', import.meta.url);
@@ -20,7 +24,9 @@ const saveForm = document.querySelector('.popup_type_new-card .popup__form');
 const formElement = document.querySelector('.popup_type_edit .popup__form');
 
 renderCard(initialCards);
-formElement.addEventListener('submit', handleFormSubmit); 
+formElement.addEventListener('submit', handleFormSubmit);
+formPlaceholder(nameInput, jobInput);
+imagePopup.addEventListener('click', closePopup); 
 
 editButton.addEventListener('click', openPopup);
 addButtton.addEventListener('click', openPopup);
