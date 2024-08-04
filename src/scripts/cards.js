@@ -1,5 +1,4 @@
-export {initialCards, renderCard, saveCard};
-import { closeClick, imageOpenClose } from "./modal.js";
+export {initialCards, createCard, like};
 
 const initialCards = [
     {
@@ -28,10 +27,8 @@ const initialCards = [
     }
 ];
 
-const placesList = document.querySelector('.places__list');
-const cardTemplate = document.querySelector('#card-template').content;
 
-function createCard(link, name, template){
+function createCard(link, name, template, like, openImage){
 
   const cardItem = template.querySelector('.places__item').cloneNode(true);
   const cardImage = cardItem.querySelector('.card__image');
@@ -42,33 +39,18 @@ function createCard(link, name, template){
   cardImage.src = link;
   cardtext.textContent = name;
   cardDeleteButton.addEventListener('click', deleteCard);
-  cardLikeButton.addEventListener('click', liking);
-  cardImage.addEventListener('click', imageOpenClose)
+  cardLikeButton.addEventListener('click', like);
+  cardImage.addEventListener('click', evt => openImage(link, name))
   return cardItem;
 }
 
-function renderCard(data) {
-
-data.forEach((el) => {
-  placesList.append(createCard(el.link, el.name, cardTemplate));
-})  
-}
 
 function deleteCard(evt) {
-evt.target.closest('.places__item').remove()
+evt.target.closest('.places__item').remove();
+evt.target.removeEventListener('click', deleteCard)
 }
 
 
-function saveCard(evt){
-  evt.preventDefault();
-  const saveCardName = document.querySelector('.popup__input_type_card-name').value;
-  const saveCardLink = document.querySelector('.popup__input_type_url').value;
-  placesList.prepend(createCard(saveCardLink, saveCardName, cardTemplate));
-  document.querySelector('.popup__input_type_card-name').value = '';
-  document.querySelector('.popup__input_type_url').value = '';
-  closeClick(evt);
-}
-
-function liking(evt){
+function like(evt){
   evt.target.classList.toggle('card__like-button_is-active');
 }
