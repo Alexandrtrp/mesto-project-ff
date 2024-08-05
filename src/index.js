@@ -1,10 +1,11 @@
 import './pages/index.css'; 
-import {initialCards, createCard, like} from './scripts/cards.js';
+import {initialCards, like, deleteCard} from './scripts/cards.js';
 import {
     openPopup,
     closePopup,
     closePopupByOverlay,
 } from './scripts/modal.js';
+import {createCard} from './scripts/card.js'
 
 export {imagePopup, openPopupImage};
 
@@ -32,7 +33,7 @@ function renderCards(data) {
 
     data.forEach((el) => {
       placesList.append
-      (createCard(el.link, el.name, cardTemplate, like, openPopupImage));
+      (createCard(el.link, el.name, cardTemplate, like, openPopupImage, deleteCard));
     })  
 }
 
@@ -68,7 +69,11 @@ function saveCard(evt){
 renderCards(initialCards);
 
 
-editButton.addEventListener('click', evt => openPopup(editPopup));
+editButton.addEventListener('click', evt => {
+  nameInput.value = profileTitle.textContent;
+  jobInput.value = profileDescription.textContent;
+  openPopup(editPopup)
+});
 addButtton.addEventListener('click', evt => openPopup(addPopup));
 
 editPopup.addEventListener('click', closePopupByOverlay);
