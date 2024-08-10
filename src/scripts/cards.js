@@ -1,4 +1,4 @@
-export {initialCards, like, deleteCard};
+export {initialCards,};
 
 const initialCards = [
     {
@@ -28,12 +28,3 @@ const initialCards = [
 ];
 
 
-function deleteCard(evt) {
-evt.target.closest('.places__item').remove();
-evt.target.removeEventListener('click', deleteCard)
-}
-
-
-function like(evt){
-  evt.target.classList.toggle('card__like-button_is-active');
-}

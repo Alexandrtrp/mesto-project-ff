@@ -1,11 +1,11 @@
 import './pages/index.css'; 
-import {initialCards, like, deleteCard} from './scripts/cards.js';
+import {initialCards} from './scripts/cards.js';
 import {
     openPopup,
     closePopup,
     closePopupByOverlay,
 } from './scripts/modal.js';
-import {createCard} from './scripts/card.js'
+import {createCard, like, deleteCard} from './scripts/card.js'
 
 export {imagePopup, openPopupImage};
 
@@ -36,11 +36,6 @@ function renderCards(data) {
       (createCard(el.link, el.name, cardTemplate, like, openPopupImage, deleteCard));
     })  
 }
-
-// function fillPopupProfileInputs(name, description) { 
-//   name.setAttribute("placeholder", profileTitle.textContent); 
-//   description.setAttribute("placeholder", profileDescription.textContent); 
-// }
 
 function openPopupImage(link, name){
   openPopup(imagePopup);
