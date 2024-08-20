@@ -5,8 +5,6 @@ export {
   closePopupByOverlay,
 };
 
-
-
 function openPopup(popup){
   popup.classList.add('popup_is-animated');
   popup.classList.add('popup_is-opened');
@@ -14,7 +12,6 @@ function openPopup(popup){
 }
 
 function closePopup(popup){
-
   popup.classList.remove('popup_is-opened');
   popup.removeEventListener('keydown', closePopupByEsc);
 

@@ -1,3 +1,4 @@
+
 export {createCard, deleteCard, like}
 
 function createCard(link, name, template, like, openImage, deleteCard){
@@ -16,12 +17,13 @@ function createCard(link, name, template, like, openImage, deleteCard){
     return cardItem;
   }
 
+
   function deleteCard(evt) {
     evt.target.closest('.places__item').remove();
     evt.target.removeEventListener('click', deleteCard)
     }
-    
-    
+
+
     function like(evt){
       evt.target.classList.toggle('card__like-button_is-active');
     }
