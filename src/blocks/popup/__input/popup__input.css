@@ -32,6 +32,12 @@
   display: block;
 }
 
+.popup__input_type_url-avatar{
+  padding-bottom: 13px;
+  margin-top: 27px;
+  padding-top: 0;
+}
+
 @media screen and (max-width: 568px) {
   .popup__title {
     font-size: 12px;

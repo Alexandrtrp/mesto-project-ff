@@ -21,3 +21,22 @@
   right: 0;
   z-index: 10;
 }
+
+
+.popup__content__delete-card{
+  flex-direction: column;
+  position: relative;
+  min-height: 181px;
+  padding: 34px 36px;
+  border-radius: 10px;
+  background: #FFF;
+  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
+}
+
+.popup__content__delete-card .popup__button{
+  margin-top: 38px;
+}
+
+.popup__content__new-avatar{
+  min-height: 272px;
+}
