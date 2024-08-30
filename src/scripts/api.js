@@ -114,9 +114,7 @@ const deleteLike = (id) => {
       "Content-Type": config.headers["Content-Type"],
     },
   })
-    .then((res) => {
-      checkResponse(res);
-    })
+    .then((res) => checkResponse(res))
     .then((res) => res.likes.length)
     .catch((err) => console.log(`Ошибка. Запрос не выполнен: ${err}`));
 };

@@ -98,11 +98,10 @@ getAllInfo().then((res) => {
 
 function addMessageBeforeSave(evt, result) {
   const buttonContent = evt.target.querySelector(".popup__button");
+  buttonContent.textContent = "Сохранение...";
   if (result) {
     buttonContent.textContent = "Сохранить";
-    return;
   }
-  buttonContent.textContent = "Сохранение...";
 }
 
 function saveProfile(evt) {
@@ -116,7 +115,7 @@ function saveProfile(evt) {
     .catch((err) => console.log(`Ошибка. Запрос не выполнен: ${err}`))
     .finally((res) => {
       evt.target.reset();
-      addMessageBeforeSave(evt, res);
+      addMessageBeforeSave(evt, true);
       closePopup(editPopup);
     });
 }
@@ -144,7 +143,7 @@ function saveCard(evt) {
     })
     .catch((err) => console.log(`Ошибка. Запрос не выполнен: ${err}`))
     .finally((res) => {
-      addMessageBeforeSave(evt, res);
+      addMessageBeforeSave(evt, true);
       saveForm.reset();
       closePopup(addPopup);
     });
@@ -156,7 +155,7 @@ function saveAvatar(evt) {
   addNewAvatar(avatarUrlInput.value)
     .catch((err) => console.log(`Ошибка. Запрос не выполнен: ${err}`))
     .finally((res) => {
-      addMessageBeforeSave(evt, res);
+      addMessageBeforeSave(evt, true);
       profileAvatar.style = `background-image: url(${avatarUrlInput.value});`;
       avatarForm.reset();
       closePopup(avatarPopup);
@@ -166,8 +165,7 @@ function saveAvatar(evt) {
 function addDeleteButton(button) {
   button.addEventListener("click", (evt) => {
     openPopup(deleteCardPopup);
-    evt.target.closest(".places__item").classList.add("delete-target");
-    deleteTarget = document.querySelector('.delete-target');
+    deleteTarget = evt.target.closest(".places__item");
   });
 }
 
