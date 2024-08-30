@@ -20,21 +20,18 @@ export {
   addNewAvatar,
 };
 
+const checkResponse = (res) => {
+  return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
+};
+
 const getProfileInfo = () => {
   return fetch(`${config.baseUrl}/users/me`, {
     headers: {
       authorization: config.headers.authorization,
     },
   })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
-    .catch((err) => {
-      console.log(`Ошибка. Запрос не выполнен: ${err}`);
-    });
+    .then((res) => checkResponse(res))
+    .catch((err) => console.log(`Ошибка. Запрос не выполнен: ${err}`));
 };
 
 const getInitialCards = () => {
@@ -43,15 +40,8 @@ const getInitialCards = () => {
       authorization: config.headers.authorization,
     },
   })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
-    .catch((err) => {
-      console.log(`Ошибка. Запрос не выполнен: ${err}`);
-    });
+    .then((res) => checkResponse(res))
+    .catch((err) => console.log(`Ошибка. Запрос не выполнен: ${err}`));
 };
 
 const getAllInfo = () => {
@@ -70,15 +60,8 @@ const pushNewProfile = function (name, about) {
       about: about,
     }),
   })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
-    .catch((err) => {
-      console.log(`Ошибка. Запрос не выполнен: ${err}`);
-    });
+    .then((res) => checkResponse(res))
+    .catch((err) => console.log(`Ошибка. Запрос не выполнен: ${err}`));
 };
 
 const pushNewCard = (name, url) => {
@@ -93,35 +76,21 @@ const pushNewCard = (name, url) => {
       link: url,
     }),
   })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
+    .then((res) => checkResponse(res))
     .then((res) => res._id)
-    .catch((err) => {
-      console.log(`Ошибка. Запрос не выполнен: ${err}`);
-    });
+    .catch((err) => console.log(`Ошибка. Запрос не выполнен: ${err}`));
 };
 
 const deleteCardApi = (id) => {
-  fetch(`${config.baseUrl}/cards/likes/${id}`, {
+  return fetch(`${config.baseUrl}/cards/likes/${id}`, {
     method: "DELETE",
     headers: {
       authorization: config.headers.authorization,
       "Content-Type": config.headers["Content-Type"],
     },
   })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
-    .catch((err) => {
-      console.log(`Ошибка. Запрос не выполнен: ${err}`);
-    });
+    .then((res) => checkResponse(res))
+    .catch((err) => console.log(`Ошибка. Запрос не выполнен: ${err}`));
 };
 
 const pushLike = (id) => {
@@ -132,16 +101,9 @@ const pushLike = (id) => {
       "Content-Type": config.headers["Content-Type"],
     },
   })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
+    .then((res) => checkResponse(res))
     .then((res) => res.likes.length)
-    .catch((err) => {
-      console.log(`Ошибка. Запрос не выполнен: ${err}`);
-    });
+    .catch((err) => console.log(`Ошибка. Запрос не выполнен: ${err}`));
 };
 
 const deleteLike = (id) => {
@@ -153,15 +115,10 @@ const deleteLike = (id) => {
     },
   })
     .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
+      checkResponse(res);
     })
     .then((res) => res.likes.length)
-    .catch((err) => {
-      console.log(`Ошибка. Запрос не выполнен: ${err}`);
-    });
+    .catch((err) => console.log(`Ошибка. Запрос не выполнен: ${err}`));
 };
 
 const addNewAvatar = (link) => {
@@ -175,13 +132,6 @@ const addNewAvatar = (link) => {
       avatar: link,
     }),
   })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
-    .catch((err) => {
-      console.log(`Ошибка. Запрос не выполнен: ${err}`);
-    });
+    .then((res) => checkResponse(res))
+    .catch((err) => console.log(`Ошибка. Запрос не выполнен: ${err}`));
 };

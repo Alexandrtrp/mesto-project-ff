@@ -6,7 +6,6 @@ export {
 };
 
 function openPopup(popup){
-  popup.classList.add('popup_is-animated');
   popup.classList.add('popup_is-opened');
   document.addEventListener('keydown', closePopupByEsc);
 }
@@ -26,6 +25,7 @@ function closePopupByEsc(evt){
 function closePopupByOverlay(evt){
   if (evt.target.classList.contains("popup") || evt.target.classList.contains('popup__close')) { 
       closePopup(evt.currentTarget); 
+      return true
     }
 }
 

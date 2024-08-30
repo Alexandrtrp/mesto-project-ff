@@ -1,5 +1,5 @@
 export { createCard, deleteCard, like };
-import { myId, deleteCardPopup } from "../index.js";
+import { myId } from "../index.js";
 import {pushLike, deleteLike} from "../scripts/api.js"
 
 function createCard(
@@ -8,10 +8,10 @@ function createCard(
   template,
   like,
   openImage,
-  openPopup,
   likes,
   anotherPersonId,
-  id
+  id,
+  addDeleteButton
 ) {
   const cardItem = template.querySelector(".places__item").cloneNode(true);
   const cardImage = cardItem.querySelector(".card__image");
@@ -40,10 +40,7 @@ function createCard(
     cardDeleteButton.style = 'display: none;'
   }
 
-  cardDeleteButton.addEventListener("click", evt=> {
-    openPopup(deleteCardPopup);
-    evt.target.closest(".places__item").classList.add('delete-target');
-  });
+  addDeleteButton(cardDeleteButton);
 
   cardLikeButton.addEventListener("click", like);
   cardImage.addEventListener("click", (evt) => openImage(link, name));
@@ -52,7 +49,6 @@ function createCard(
 
 function deleteCard(evt) {
   evt.closest(".places__item").remove();
-  evt.removeEventListener("click", deleteCard);
 }
 
 function like(evt) {
@@ -63,11 +59,13 @@ function like(evt) {
     .then((newQuantity)=>{
       evt.target.closest(".places__item").querySelector(".card__like-button_likes").textContent = newQuantity;
     })
+    .catch((err) => console.log(`Ошибка. Запрос не выполнен: ${err}`))
   } else {
     evt.target.classList.add("card__like-button_is-active");
     pushLike(likeId)
     .then((newQuantity)=>{
       evt.target.closest(".places__item").querySelector(".card__like-button_likes").textContent = newQuantity;
     })
+    .catch((err) => console.log(`Ошибка. Запрос не выполнен: ${err}`))
   }
 }
