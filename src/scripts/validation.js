@@ -26,10 +26,7 @@ function hideInputError(formElement, inputElement, settings) {
 function isValid(formElement, inputElement, settings) {
   if (inputElement.validity.patternMismatch || inputElement.validity.typeMismatch) {
     inputElement.setCustomValidity(inputElement.dataset.errorMessageDefault);
-    const validClasses = ['popup__input_type_name', 'popup__input_type_card-name']
-    if(inputElement.validity.patternMismatch && [...inputElement.classList].some(className => validClasses.includes(className))){
-      inputElement.setCustomValidity(inputElement.dataset.errorMessage);
-    }
+    addDopValidationMessege(inputElement);
   } else {
     inputElement.setCustomValidity("");
   }
@@ -40,6 +37,17 @@ function isValid(formElement, inputElement, settings) {
     hideInputError(formElement, inputElement, settings);
   }
 }
+
+function addDopValidationMessege(inputElement){
+  const dopValidClasses = ['popup__input_type_name', 'popup__input_type_card-name']
+  if(inputElement.validity.patternMismatch && [...inputElement.classList].some(className => dopValidClasses.includes(className))){
+    inputElement.setCustomValidity(inputElement.dataset.errorMessage);
+  }
+}
+
+// Перечислены уникальные селекторы так как по заданию требуется именно для определенных двух инпутов добавить
+// второе кастомное сообщение при валидации. Данная функия будет выступать дополнительным обЪектом настроек
+// для дополнительных кастомных сообщений
 
 function toggleButtonState(inputList, buttonElement, inactiveButtonClass) {
   if (inputList.length === 0) {

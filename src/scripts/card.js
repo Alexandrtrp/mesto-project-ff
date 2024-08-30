@@ -1,5 +1,4 @@
 export { createCard, deleteCard, like };
-import { myId } from "../index.js";
 import {pushLike, deleteLike} from "../scripts/api.js"
 
 function createCard(
@@ -10,8 +9,9 @@ function createCard(
   openImage,
   likes,
   anotherPersonId,
-  id,
-  addDeleteButton
+  cardId,
+  localId,
+  addDeleteButton,
 ) {
   const cardItem = template.querySelector(".places__item").cloneNode(true);
   const cardImage = cardItem.querySelector(".card__image");
@@ -20,14 +20,14 @@ function createCard(
   const cardLikeButton = cardItem.querySelector(".card__like-button");
   const quantityLikes = cardItem.querySelector(".card__like-button_likes");
 
-  cardItem.id = id
+  cardItem.id = cardId;
   cardImage.src = link;
   cardtext.textContent = name;
   quantityLikes.textContent = likes.length;
 
   if(likes!==0){
     likes.forEach(element => {
-      if(element._id === myId){
+      if(element._id === localId){
         cardLikeButton.classList.add("card__like-button_is-active");
       }
     });
@@ -36,11 +36,13 @@ function createCard(
   }
 
 
-  if(anotherPersonId !== myId){
+  if(anotherPersonId !== localId){
     cardDeleteButton.style = 'display: none;'
   }
 
-  addDeleteButton(cardDeleteButton);
+  // addDeleteButton(cardDeleteButton);
+
+  cardDeleteButton.addEventListener('click', evt=>addDeleteButton(cardItem));
 
   cardLikeButton.addEventListener("click", like);
   cardImage.addEventListener("click", (evt) => openImage(link, name));

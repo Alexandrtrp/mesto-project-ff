@@ -11,6 +11,7 @@ const config = {
 };
 
 export {
+  getProfileInfo, getInitialCards,
   getAllInfo,
   pushNewProfile,
   pushNewCard,
@@ -44,11 +45,10 @@ const getInitialCards = () => {
     .catch((err) => console.log(`Ошибка. Запрос не выполнен: ${err}`));
 };
 
-const getAllInfo = () => {
-  return Promise.all([getProfileInfo, getInitialCards]);
-};
+const getAllInfo = () => Promise.all([getProfileInfo(), getInitialCards()]);
+;
 
-const pushNewProfile = function (name, about) {
+const pushNewProfile = (name, about)=> {
   return fetch(`${config.baseUrl}/users/me`, {
     method: "PATCH",
     headers: {
